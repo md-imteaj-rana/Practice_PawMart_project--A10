@@ -12,9 +12,9 @@ const Login = () => {
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
                 <form className="fieldset">
-                <label className="label">Email</label>
+                <label className="label text-gray-800">Email</label>
                 <input type="email" className="input" placeholder="Email" />
-                <label className="label">Password</label>
+                <label className="label text-gray-800">Password</label>
                 <input type="password" className="input" placeholder="Password" />
                 <div><a className="link text-red-700 underline link-hover">Forgot password?</a></div>
                 <div className='underline text-blue-600'><Link to={'/Register'}>New at PawMart? Register now.</Link></div>
