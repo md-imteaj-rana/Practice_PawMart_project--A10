@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { motion } from "motion/react"
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router';
-import { motion } from "motion/react"
 
-const PopularSection = () => {
-
+const Services = () => {
     const [services, setServices] = useState([]);
-
-    useEffect(() => {
-        fetch('/services.json').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
-    },[])
-
-    //console.log(games)
-
+    
+        useEffect(() => {
+            fetch('/services.json').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
+        },[])
   return (
-    <div className='mt-30 px-8'>
-      <div>
-        <h2 className='font-bold text-4xl text-center mb-10'>Because Every Pet Deserves Love and Care.</h2>
-      </div>
-
-    {/*card*/}
-    <div className='grid grid-cols-1 md:grid-cols-3 gap-3 mt-6'>
+    <div className='my-10 px-5 pl-13 mb-20'>
+        <title>Services</title>
+        <h2 className='font-bold text-4xl text-center mb-10'>Find Your Furry Friend Today!</h2>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-3 mt-6'>
         {
-            services.slice(0,6).map(service => 
+            services.map(service => 
                 <motion.div initial={{ scale: 0.6 }} animate={{scale: 1,transition: { duration: 1 }}} className="card bg-base-100 w-96 shadow-sm">
                 <figure>
                     <img className='w-full h-80 object-cover'
@@ -45,17 +40,8 @@ const PopularSection = () => {
             )
         }
         </div>
-      
-      <div className="flex justify-center mt-8">
-				<Link to="/Services">
-					<button className="btn btn-primary shadow-none bg-gray-800 mb-5">
-						Show All
-					</button>
-				</Link>
-			</div>
-
     </div>
   )
 }
 
-export default PopularSection
+export default Services
