@@ -22,6 +22,7 @@ const Profile = () => {
             displayName: name, photoURL: imageurl
             }).then(() => {
                 setUser({...user, photoURL: imageurl, displayName: name})
+                alert("Profile info updated!")
             // Profile updated!
             // ...
             }).catch((error) => {
