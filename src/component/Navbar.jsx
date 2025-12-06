@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOut(auth)
     alert("Logout success.")
-    navigate('/');
+    navigate(location.state - '/');
   }
 
   return (

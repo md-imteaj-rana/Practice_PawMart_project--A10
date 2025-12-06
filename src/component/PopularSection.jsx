@@ -38,7 +38,7 @@ const PopularSection = () => {
                         <p className='font-semibold text-red-600'>{service?.providerName}</p>
                     </div>
                     <div className="card-actions flex items-center justify-between mt-4">
-                    <Link to={`/GameDetail/${service?.id}`}><button className="btn btn-primary bg-gray-800 border-none shadow-none">View Details</button></Link>
+                    <Link to={`/details/${service?.serviceId}`}><button className="btn btn-primary bg-gray-800 border-none shadow-none">View Details</button></Link>
                     </div>
                 </div>
                 </motion.div>
