@@ -1,7 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { useContext } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router'
+import { AuthContext } from '../provider/AuthProvider'
+import { signOut } from 'firebase/auth'
+import auth from '../firebase/firebase.config'
 
 const Navbar = () => {
+    const {user} = useContext(AuthContext)
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleSignOut = () => {
+    signOut(auth)
+    alert("Logout success.")
+    navigate('/');
+  }
+
   return (
     <div className=''>
       <div className="navbar bg-base-100 shadow-sm px-8">
@@ -33,9 +46,16 @@ const Navbar = () => {
             <li><Link to="">My profile</Link></li>
             </ul>
         </div>
-        <div className="navbar-end">
-            <Link to={'/Login'} className="btn text-white bg-gray-800 rounded-lg px-7">Login</Link>
-        </div>
+    {
+    user && <div className="navbar-end">
+    <button onClick={handleSignOut} className="btn px-6 btn-primary shadow-none bg-gray-800">Logout</button>
+    </div>
+    }
+    {
+    !user && <div className="navbar-end">
+    <Link to={'/Login'} className="btn px-6 btn-primary shadow-none bg-gray-800">Login</Link>
+    </div>
+    }
         </div>
     </div>
   )
