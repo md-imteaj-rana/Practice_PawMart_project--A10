@@ -49,6 +49,10 @@ const Login = () => {
       .catch(err => console.log(err))
     }
 
+    const handleForget = () => {
+    navigate(`/ForgetPass/${email}`)
+    }
+
   return (
     <div>
       <title>Login to PawMart</title>
@@ -61,12 +65,12 @@ const Login = () => {
             <div className="card-body">
                 <form onSubmit={handleSubmit} className="fieldset">
                 <label className="label text-gray-800">Email</label>
-                <input onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="input" placeholder="Email" />
+                <input onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="input" placeholder="Email" required />
 
                 <label className="label text-gray-800">Password</label>
-                <input name='password' type="password" className="input" placeholder="Password" />
+                <input name='password' type="password" className="input" placeholder="Password" required/>
 
-                <div><a className="link text-red-700 underline link-hover">Forgot password?</a></div>
+                <div><button type="button" onClick={handleForget} className="link link-hover text-red-700 underline">Forgot password</button></div>
                 <div className='underline text-blue-600'><Link to={'/Register'}>New at PawMart? Register now.</Link></div>
                 <button className="btn btn-neutral mt-4 bg-gray-800 rounded-lg">Login</button>
                 <button type="button" onClick={googleSignin} className="btn bg-white text-black border-[#e5e5e5]">

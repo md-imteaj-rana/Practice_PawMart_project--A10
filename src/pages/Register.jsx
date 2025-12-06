@@ -90,16 +90,16 @@ const Register = () => {
             <div className="card-body">
                 <form onSubmit={handleSubmit} className="fieldset">
                 <label className="label text-gray-800">Name</label>
-                <input name='name' type="text" className="input" placeholder="Enter your name" />
+                <input name='name' type="text" className="input" placeholder="Enter your name" required/>
 
                 <label className="label text-gray-800">Image URL</label>
                 <input name='imageurl' type="text" className="input" placeholder="Image URL" />
 
                 <label className="label text-gray-800">Email</label>
-                <input name='email'type="email" className="input" placeholder="Email" />
+                <input name='email'type="email" className="input" placeholder="Email" required/>
 
                 <label className="label text-gray-800">Password</label>
-                <input name='password'type="password" className="input" placeholder="Password" />
+                <input name='password'type="password" className="input" placeholder="Password" required/>
                 
                 <div className='underline text-blue-600'><Link to={'/Login'}>Already have an account? Login now.</Link></div>
                 <button className="btn btn-neutral mt-4 bg-gray-800 rounded-lg">Sign Up</button>
