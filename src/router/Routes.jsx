@@ -8,11 +8,13 @@ import PrivateRoutes from "./PrivateRoutes";
 import Profile from "../pages/Profile";
 import ServiceDetail from "../pages/ServiceDetails";
 import ForgetPass from "../pages/ForgetPass";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    errorElement: <Error></Error>,
     children:[
         {
             path: "/",

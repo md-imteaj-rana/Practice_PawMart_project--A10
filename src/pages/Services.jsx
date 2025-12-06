@@ -29,7 +29,7 @@ const Services = () => {
                     <p>{service?.description}</p>
                     <div className='flex items-center'>
                         <p className='text-blue-400 font-semibold flex items-center gap-1'>{service?.rating}<FaStar /></p>
-                        <p className='font-semibold text-purple-600'>Price: {service?.price}</p>
+                        <p className='font-semibold text-purple-600'>Price: {service?.price} tk</p>
                         <p className='font-semibold text-red-600'>{service?.providerName}</p>
                     </div>
                     <div className="card-actions flex items-center justify-between mt-4">

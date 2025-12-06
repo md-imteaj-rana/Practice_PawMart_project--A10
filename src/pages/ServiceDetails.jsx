@@ -29,8 +29,8 @@ const ServiceDetail = () => {
             <h2 className='font-semibold text-xl text-gray-600'>Ratings : {findRes?.rating}</h2>
             <h2 className='font-semibold text-xl text-gray-600'>Provider name : {findRes?.providerName}</h2>
             <h2 className='font-semibold text-xl text-gray-600'>Provider Email : {findRes?.providerEmail}</h2>
-            <h2 className='font-semibold text-xl text-gray-600'>Price : {findRes?.price}</h2>
-            
+            <h2 className='font-semibold text-xl text-gray-600'>Price : {findRes?.price} tk</h2>
+            <button className="btn btn-primary bg-gray-800 border-none shadow-none"><a target='blank'>Book Now</a></button>
         </div>
     </div>
   )
