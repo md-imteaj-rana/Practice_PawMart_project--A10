@@ -30,7 +30,7 @@ const Navbar = () => {
                 <li>
                 <Link to="/Services">Services</Link>
                 </li>
-                <li><Link to="">My profile</Link></li>
+                <li><Link to="/Profile">My profile</Link></li>
             </ul>
             </div>
             <a className="btn btn-ghost text-2xl font-bold"><span className='text-pink-500'>Paw</span>Mart</a>
@@ -43,7 +43,7 @@ const Navbar = () => {
                 <Link to='/Services'>Services</Link>
     
             </li>
-            <li><Link to="">My profile</Link></li>
+            <li><Link to="/Profile">My profile</Link></li>
             </ul>
         </div>
     {
