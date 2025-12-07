@@ -32,6 +32,7 @@ const Navbar = () => {
                 </li>
                 <li><Link to="/Profile">My profile</Link></li>
                 <li><Link to="/AddService">Add Service</Link></li>
+                <li><Link to="/MyServices">My Services</Link></li>
             </ul>
             </div>
             <a className="btn btn-ghost text-2xl font-bold"><span className='text-pink-500'>Paw</span>Mart</a>
@@ -46,6 +47,7 @@ const Navbar = () => {
             </li>
             <li><Link to="/Profile">My profile</Link></li>
             <li><Link to="/AddService">Add Service</Link></li>
+            <li><Link to="/MyServices">My Services</Link></li>
             </ul>
         </div>
     {
