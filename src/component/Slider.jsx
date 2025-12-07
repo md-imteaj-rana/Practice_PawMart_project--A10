@@ -6,6 +6,7 @@ import img4 from '../assets/slider4.jpg'
 const Slider = () => {
   return (
     <div>
+      <h2 className='text-4xl font-bold text-center mb-5 mt-10'>Adopt, Don’t Shop — Give a Pet a Home.</h2>
       <div className="carousel w-full h-150">
         <div id="slide1" className="carousel-item relative w-full">
             <img

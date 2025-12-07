@@ -8,10 +8,11 @@ const PopularSection = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('/services.json').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
+        fetch('http://localhost:3000/service').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
     },[])
 
     //console.log(games)
+    console.log(services)
 
   return (
     <div className='mt-30 px-8'>
@@ -26,19 +27,19 @@ const PopularSection = () => {
                 <motion.div initial={{ scale: 0.6 }} animate={{scale: 1,transition: { duration: 1 }}} className="card bg-base-100 w-96 shadow-sm">
                 <figure>
                     <img className='w-full h-80 object-cover'
-                    src={service?.image}
+                    src={service?.imageurl}
                     alt="pet care" />
                 </figure>
                 <div className="card-body">
-                    <h2 className="card-title">{service?.serviceName}</h2>
+                    <h2 className="card-title font-bold text-xl">{service?.name}</h2>
                     <p>{service?.description}</p>
                     <div className='flex items-center'>
-                        <p className='text-blue-400 font-semibold flex items-center gap-1'>{service?.rating}<FaStar /></p>
+                        <p className='text-blue-400 font-semibold flex items-center gap-1'>{service?.category}</p>
                         <p className='font-semibold text-purple-600'>Price: {service?.price} tk</p>
-                        <p className='font-semibold text-red-600'>{service?.providerName}</p>
+                        <p className='font-semibold text-red-600'>Location: {service?.location}</p>
                     </div>
                     <div className="card-actions flex items-center justify-between mt-4">
-                    <Link to={`/details/${service?.serviceId}`}><button className="btn btn-primary bg-gray-800 border-none shadow-none">View Details</button></Link>
+                    <Link to={`/details/${service?._id}`}><button className="btn btn-primary bg-gray-800 border-none shadow-none">View Details</button></Link>
                     </div>
                 </div>
                 </motion.div>
