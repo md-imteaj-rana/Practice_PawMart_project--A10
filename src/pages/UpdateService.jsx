@@ -1,15 +1,31 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../provider/AuthProvider'
+import { useNavigate, useParams } from 'react-router'
+import axios from 'axios'
 
-const AddService = () => {
+const UpdateService = () => {
 
-  const {user} = useContext(AuthContext)
-  
+    const {user} = useContext(AuthContext)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
+    const {id} = useParams()
+
+    const [service, setService] = useState()
+
+    const [category, setCategory] = useState(service?.category)
+
+    const navigation = useNavigate()
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/service/${id}`)
+        .then(res => {
+            setService(res.data)
+            setCategory(res.data.category)
+        })
+    },[id])
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        const form = e.target;
 
     const name = form.name.value
     const category = form.category.value
@@ -30,28 +46,32 @@ const AddService = () => {
     imageurl,
     date,
     email,
+    createdAt:service?.createdAt
     };
 
-    //console.log(formData)
-
-    axios.post('http://localhost:3000/service', formData)
+    axios.put(`http://localhost:3000/update/${id}`, formData)
     .then(res => {
-        console.log(res)
+        console.log(res.data)
+        alert("Update Successfull.")
+        navigation('/MyServices')
     })
-  };
-
-  
-
-  
+    .catch(err => {
+        console.log(err)
+    })
+ }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">Add Listing</h1>
+    <div>
+      <title>Update Service info</title>
+
+      <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-6 text-center">Update Service info</h1>
       
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 p-6 bg-white shadow rounded-2xl">
+      <form onSubmit={handleUpdate} className="grid grid-cols-1 gap-4 p-6 bg-white shadow rounded-2xl">
         {/* Product/Pet Name */}
         <label className="label text-gray-800 font-semibold">Product / Pet Name</label>
         <input
+          defaultValue={service?.name}
           type="text"
           name="name"
           placeholder="Product / Pet Name"
@@ -65,6 +85,7 @@ const AddService = () => {
         <label className="label text-gray-800 font-semibold">Category</label>
         <select
           name="category"
+          defaultValue={category}
           
           
           className="p-3 border rounded-xl w-full"
@@ -81,6 +102,7 @@ const AddService = () => {
           type="number"
           name="price"
           placeholder="Price"
+          defaultValue={service?.price}
           
           
           className="p-3 border rounded-xl w-full"
@@ -93,6 +115,7 @@ const AddService = () => {
           type="text"
           name="location"
           placeholder="Location"
+          defaultValue={service?.location}
           
           
           className="p-3 border rounded-xl w-full"
@@ -104,6 +127,7 @@ const AddService = () => {
         <textarea
           name="description"
           placeholder="Description"
+          defaultValue={service?.description}
           
           
           className="p-3 border rounded-xl w-full h-28"
@@ -116,6 +140,7 @@ const AddService = () => {
           type="text"
           name="image"
           placeholder="Image URL"
+          defaultValue={service?.imageurl}
           
           
           className="p-3 border rounded-xl w-full"
@@ -127,6 +152,7 @@ const AddService = () => {
         <input
           type="date"
           name="date"
+          defaultValue={service?.date}
           
           
           className="p-3 border rounded-xl w-full"
@@ -149,11 +175,12 @@ const AddService = () => {
         <button
           type="submit"
           className="mt-4 py-3 px-6 bg-gray-800 text-white rounded-xl shadow hover:bg-gray-600">
-          Submit
+          Update
         </button>
       </form>
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default AddService;
+export default UpdateService

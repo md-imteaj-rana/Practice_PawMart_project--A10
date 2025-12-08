@@ -13,7 +13,7 @@ const Services = () => {
         },[])
   return (
     <div className='my-10 px-5 pl-13 mb-20'>
-        <title>Services</title>
+        <title>Pets & Supplies</title>
         <h2 className='font-bold text-4xl text-center mb-10'>Find Your Furry Friend Today!</h2>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-3 mt-6'>
         {
@@ -21,7 +21,7 @@ const Services = () => {
                 <motion.div initial={{ scale: 0.6 }} animate={{scale: 1,transition: { duration: 1 }}} className="card bg-base-100 w-96 shadow-sm">
                 <figure>
                     <img className='w-full h-80 object-cover'
-                    src={service?.image}
+                    src={service?.imageurl}
                     alt="pet care" />
                 </figure>
                 <div className="card-body">
