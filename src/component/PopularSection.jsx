@@ -15,7 +15,7 @@ const PopularSection = () => {
     console.log(services)
 
   return (
-    <div className='mt-30 px-8'>
+    <div className='mt-30 md:px-8'>
       <div>
         <h2 className='font-bold text-4xl text-center mb-10'>Because Every Pet Deserves Love and Care.</h2>
       </div>
