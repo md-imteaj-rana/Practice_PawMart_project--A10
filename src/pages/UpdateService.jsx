@@ -62,7 +62,7 @@ const UpdateService = () => {
 
   return (
     <div>
-      <title>Update Service info</title>
+      <title>Update Listing info</title>
 
       <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-6 text-center">Update Service info</h1>
