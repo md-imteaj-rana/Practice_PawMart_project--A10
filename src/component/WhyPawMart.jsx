@@ -3,7 +3,7 @@ import { Heart, PawPrint, ShieldCheck, Users } from 'lucide-react'
 
 const WhyPawMart = () => {
   return (
-    <div className="w-full bg-gradient-to-br from-pink-100 to-orange-100 py-16 px-6">
+    <div className="w-full bg-linear-to-br from-pink-100 to-orange-100 py-16 px-6">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 flex items-center justify-center gap-2 mb-4">
           🐾 Why Adopt from <span className="text-orange-600">PawMart?</span>
