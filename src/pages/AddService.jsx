@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const AddService = () => {
 
   const {user} = useContext(AuthContext)
+
+  const navigation = useNavigate()
   
 
   const handleSubmit = (e) => {
@@ -13,7 +16,7 @@ const AddService = () => {
 
     const name = form.name.value
     const category = form.category.value
-    const price = parseInt(form.price.value)+1
+    const price = parseInt(form.price.value)
     const location = form.location.value
     const description = form.description.value
     const imageurl = form.image.value
@@ -37,6 +40,8 @@ const AddService = () => {
     axios.post('http://localhost:3000/service', formData)
     .then(res => {
         console.log(res)
+        alert("Item added.")
+        navigation('/Services')
     })
   };
 
@@ -46,6 +51,7 @@ const AddService = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
+      <title>Add Listing</title>
       <h1 className="text-4xl font-bold mb-6 text-center">Add Listing</h1>
       
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 p-6 bg-white shadow rounded-2xl">

@@ -7,14 +7,27 @@ import { Link } from 'react-router';
 
 const Services = () => {
     const [services, setServices] = useState([]);
+
+    const [category, setCategory] = useState('')
     
         useEffect(() => {
-            fetch('http://localhost:3000/service').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
-        },[])
+            fetch(`http://localhost:3000/service?category=${category}`).then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
+        },[category])
   return (
     <div className='my-10 px-5 pl-13 mb-20'>
         <title>Pets & Supplies</title>
         <h2 className='font-bold text-4xl text-center mb-10'>Find Your Furry Friend Today!</h2>
+
+        {/*filter by category*/}
+        <select onChange={(e) => setCategory(e.target.value)} defaultValue="Filter by Category" className="select">
+        <option disabled={true}>Filter by Category</option>
+        <option value=''>All items</option>
+        <option value='Pets'>Pets</option>
+        <option value='Food'>Food</option>
+        <option value='Accessories'>Accessories</option>
+        <option value='Care Products'>Care Products</option>
+        </select>
+
       <div className='grid grid-cols-1 md:grid-cols-3 gap-3 mt-6'>
         {
             services.map(service => 
@@ -28,7 +41,7 @@ const Services = () => {
                     <h2 className="card-title">{service?.name}</h2>
                     <p>{service?.description}</p>
                     <div className='flex items-center'>
-                        <p className='text-blue-400 font-semibold flex items-center gap-1'>Category: {service?.category}</p>
+                        <p className='text-blue-400 font-semibold flex items-center gap-1'>{service?.category}</p>
                         <p className='font-semibold text-purple-600'>Price: {service?.price} tk</p>
                         <p className='font-semibold text-red-600'>Location: {service?.location}</p>
                     </div>

@@ -29,7 +29,7 @@ const UpdateService = () => {
 
     const name = form.name.value
     const category = form.category.value
-    const price = parseInt(form.price.value)+1
+    const price = parseInt(form.price.value)
     const location = form.location.value
     const description = form.description.value
     const imageurl = form.image.value
