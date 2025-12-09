@@ -17,7 +17,7 @@ const UpdateService = () => {
     const navigation = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/service/${id}`)
+        axios.get(`https://paw-mart-a10-backend.vercel.app/service/${id}`)
         .then(res => {
             setService(res.data)
             setCategory(res.data.category)
@@ -50,7 +50,7 @@ const UpdateService = () => {
     createdAt:service?.createdAt
     };
 
-    axios.put(`http://localhost:3000/update/${id}`, formData)
+    axios.put(`https://paw-mart-a10-backend.vercel.app/update/${id}`, formData)
     .then(res => {
         console.log(res.data)
         //alert("Update Successfull.")

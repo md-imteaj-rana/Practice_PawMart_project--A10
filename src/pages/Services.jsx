@@ -11,7 +11,7 @@ const Services = () => {
     const [category, setCategory] = useState('')
     
         useEffect(() => {
-            fetch(`http://localhost:3000/service?category=${category}`).then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
+            fetch(`https://paw-mart-a10-backend.vercel.app/service?category=${category}`).then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
         },[category])
   return (
     <div className='my-10 px-5 pl-13 mb-20'>

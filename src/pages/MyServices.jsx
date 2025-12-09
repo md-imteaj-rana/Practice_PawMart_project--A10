@@ -13,7 +13,7 @@ const MyServices = () => {
     const navigation = useNavigate()
         
             useEffect(() => {
-                fetch(`http://localhost:3000/MyServices?email=${user?.email}`).then(res => res.json()).then(data => setMyServices(data)).catch(err => console.log(err))
+                fetch(`https://paw-mart-a10-backend.vercel.app/MyServices?email=${user?.email}`).then(res => res.json()).then(data => setMyServices(data)).catch(err => console.log(err))
             },[user?.email])
     
 
@@ -28,7 +28,7 @@ const MyServices = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-      axios.delete(`http://localhost:3000/delete/${id}`)
+      axios.delete(`https://paw-mart-a10-backend.vercel.app/delete/${id}`)
       .then(res => {
         // console.log(res.data)
         if(res.data.acknowledged){

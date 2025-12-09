@@ -38,7 +38,7 @@ const AddService = () => {
 
     //console.log(formData)
 
-    axios.post('http://localhost:3000/service', formData)
+    axios.post('https://paw-mart-a10-backend.vercel.app/service', formData)
     .then(res => {
         
         if(res.data.acknowledged){

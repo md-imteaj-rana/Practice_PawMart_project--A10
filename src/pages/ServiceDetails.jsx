@@ -12,7 +12,7 @@ const ServiceDetail = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch(`http://localhost:3000/service/${id}`)
+    fetch(`https://paw-mart-a10-backend.vercel.app/service/${id}`)
       .then(res => res.json())
       .then(data => setService(data))
       .catch(err => console.log(err))
@@ -46,7 +46,7 @@ const ServiceDetail = () => {
         notes,
     }
 
-    axios.post('http://localhost:3000/orders', formData)
+    axios.post('https://paw-mart-a10-backend.vercel.app/orders', formData)
     .then(res => {
         console.log(res.data)
         Swal.fire({

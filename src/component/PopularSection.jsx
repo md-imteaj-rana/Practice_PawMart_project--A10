@@ -8,7 +8,7 @@ const PopularSection = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/service').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
+        fetch('https://paw-mart-a10-backend.vercel.app/service').then(res => res.json()).then(data => setServices(data)).catch(err => console.log(err))
     },[])
 
     //console.log(games)
