@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const AddService = () => {
 
@@ -39,9 +40,32 @@ const AddService = () => {
 
     axios.post('http://localhost:3000/service', formData)
     .then(res => {
-        console.log(res)
-        alert("Item added.")
+        
+        if(res.data.acknowledged){
+          Swal.fire({
+          title: "Item added.",
+          icon: "success",
+          draggable: true
+          });
+          form.reset()
+        }
+        else{
+          Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+        }
+        
         navigation('/Services')
+    })
+    .catch(err => {
+      console.log(err)
+      Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
     })
   };
 

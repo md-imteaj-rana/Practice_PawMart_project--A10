@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { AuthContext } from '../provider/AuthProvider'
 import { signOut } from 'firebase/auth'
@@ -8,6 +8,19 @@ const Navbar = () => {
     const {user} = useContext(AuthContext)
   const location = useLocation()
   const navigate = useNavigate()
+
+  const [isChecked, setIsChecked] = useState(true)
+
+  const handleTheme = () => {
+    setIsChecked(!isChecked)
+
+    if(isChecked){
+      document.querySelector('html').setAttribute('data-theme', 'dark')
+    }
+    else{
+      document.querySelector('html').setAttribute('data-theme', 'light')
+    }
+  }
 
   const handleSignOut = () => {
     signOut(auth)
@@ -42,7 +55,17 @@ const Navbar = () => {
                 }
             </ul>
             </div>
-            <Link to={'/'} className="btn btn-ghost text-2xl font-bold"><span className='text-pink-500'>Paw</span>Mart</Link>
+            <Link to={'/'} className="btn btn-ghost text-2xl font-bold -ml-4.5"><span className='text-pink-500'>Paw</span>Mart</Link>
+
+            <label className="toggle text-base-content mt-1 -ml-2.5">
+            <input onClick={handleTheme} type="checkbox" value="synthwave" className="theme-controller" />
+
+            <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+
+            <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+
+          </label>
+
         </div>
         <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
@@ -64,6 +87,9 @@ const Navbar = () => {
                 }
             </ul>
         </div>
+
+    
+
     {
     user && <div className="navbar-end">
     <button onClick={handleSignOut} className="btn px-6 btn-primary shadow-none bg-gray-800">Logout</button>

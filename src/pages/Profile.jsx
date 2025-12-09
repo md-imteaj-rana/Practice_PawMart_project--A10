@@ -2,6 +2,7 @@ import { updateProfile } from 'firebase/auth'
 import React, { useContext, useState } from 'react'
 import auth from '../firebase/firebase.config'
 import { AuthContext } from '../provider/AuthProvider'
+import Swal from 'sweetalert2'
 
 const Profile = () => {
 
@@ -22,7 +23,12 @@ const Profile = () => {
             displayName: name, photoURL: imageurl
             }).then(() => {
                 setUser({...user, photoURL: imageurl, displayName: name})
-                alert("Profile info updated!")
+                //alert("Profile info updated!")
+                Swal.fire({
+                title: "Profile info updated!",
+                icon: "success",
+                draggable: true
+              });
             // Profile updated!
             // ...
             }).catch((error) => {
@@ -42,7 +48,7 @@ const Profile = () => {
             <img src={user?.photoURL} />
           </div>
         </div>
-        <h2 className='font-bold text-4xl my-3 text-gray-800'>{user?.displayName}</h2>
+        <h2 className='font-bold text-4xl my-3'>{user?.displayName}</h2>
         <h2 className='font-semibold text-2xl mb-5 text-blue-500'>Email : {user?.email}</h2>
         <button onClick={handleUpdateform} className="btn px-6 btn-primary shadow-none bg-gray-800 mb-10">Update your profile info!</button>
 

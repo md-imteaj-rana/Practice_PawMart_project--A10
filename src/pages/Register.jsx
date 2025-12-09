@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router'
 import { AuthContext } from '../provider/AuthProvider'
 import { updateProfile } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const {registerWithEmailPassword, setUser, handleGoogleSignin} = useContext(AuthContext);
@@ -49,20 +50,31 @@ const Register = () => {
             displayName: name, photoURL: imageurl
             }).then(() => {
                 setUser(userCredential.user)
-                alert("Registration successful")
+                // alert("Registration successful")
+                Swal.fire({
+                title: "Registration successful",
+                icon: "success",
+                draggable: true
+              });
                 navigate(location.state ? location.state : '/')
             // Profile updated!
             // ...
             }).catch((error) => {
                 console.log(error)
-                alert(error)
+                // alert(error)
+                Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                
+              });
             // An error occurred
             // ...
             });
         })
         .catch((error) => {
         console.log(error)
-        alert(error)
+        //alert(error)
          });
 
   }   
@@ -73,7 +85,12 @@ const Register = () => {
       const user = result.user
       setUser({...user, photoURL: user.photoURL, displayName: user.displayName})
       navigate(location.state ? location.state : '/')
-      alert("Registration success")
+      //alert("Registration success")
+      Swal.fire({
+                title: "Registration successful",
+                icon: "success",
+                draggable: true
+              });
     })
     .catch(err => console.log(err))
   }

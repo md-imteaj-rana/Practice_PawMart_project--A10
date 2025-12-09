@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import auth from '../firebase/firebase.config'
 import { AuthContext } from '../provider/AuthProvider'
+import Swal from 'sweetalert2'
 
 const Login = () => {
 
@@ -22,7 +23,12 @@ const Login = () => {
           // Signed in 
           const user = userCredential.user;
           setUser(user)
-          alert("Login success")
+          // alert("Login success")
+          Swal.fire({
+          title: "Login success",
+          icon: "success",
+          draggable: true
+        });
           navigate(location.state ? location.state : '/')
           // ...
         })
@@ -43,7 +49,7 @@ const Login = () => {
           displayName: user.displayName || "User",
           photoURL: user.photoURL || "https://i.ibb.co/default-avatar.png"
         })
-        alert("Login success.")
+        // alert("Login success.")
         navigate(location.state ? location.state : '/')
       })
       .catch(err => console.log(err))

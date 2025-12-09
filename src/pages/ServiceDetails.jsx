@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { AuthContext } from '../provider/AuthProvider'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const ServiceDetail = () => {
 
   const { id } = useParams()
   const [service, setService] = useState([])
   const {user} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`http://localhost:3000/service/${id}`)
@@ -47,10 +49,21 @@ const ServiceDetail = () => {
     axios.post('http://localhost:3000/orders', formData)
     .then(res => {
         console.log(res.data)
-        alert('Your order has been placed.')
+        Swal.fire({
+        title: "Your order has been placed",
+        icon: "success",
+        draggable: true
+      });
+        navigate('/MyOrders')
     })
     .catch(err => {
         console.log(err)
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        
+      });
     })
 
   }

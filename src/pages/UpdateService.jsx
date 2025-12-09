@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../provider/AuthProvider'
 import { useNavigate, useParams } from 'react-router'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const UpdateService = () => {
 
@@ -52,7 +53,12 @@ const UpdateService = () => {
     axios.put(`http://localhost:3000/update/${id}`, formData)
     .then(res => {
         console.log(res.data)
-        alert("Update Successfull.")
+        //alert("Update Successfull.")
+        Swal.fire({
+                        title: "Update Successfull.",
+                        icon: "success",
+                        draggable: true
+                      });
         navigation('/MyServices')
     })
     .catch(err => {
