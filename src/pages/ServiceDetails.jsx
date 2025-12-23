@@ -8,7 +8,7 @@ const ServiceDetail = () => {
 
   const { id } = useParams()
   const [service, setService] = useState([])
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -34,246 +34,176 @@ const ServiceDetail = () => {
     const notes = form.notes.value
 
     const formData = {
-        productName,
-        buyerName,
-        address,
-        phoneNumber,
-        email,
-        price,
-        productId,
-        quantity,
-        date,
-        notes,
+      productName,
+      buyerName,
+      address,
+      phoneNumber,
+      email,
+      price,
+      productId,
+      quantity,
+      date,
+      notes,
     }
 
     axios.post('https://paw-mart-a10-backend.vercel.app/orders', formData)
-    .then(res => {
-        console.log(res.data)
+      .then(res => {
         Swal.fire({
-        title: "Your order has been placed",
-        icon: "success",
-        draggable: true
-      });
+          title: "Your order has been placed",
+          icon: "success",
+          draggable: true
+        });
         navigate('/MyOrders')
-    })
-    .catch(err => {
-        console.log(err)
+      })
+      .catch(err => {
         Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-        
-      });
-    })
-
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      })
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6">
       <title>Listing Details</title>
 
-      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8">
+      <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl p-4 sm:p-8">
 
         {/* Image */}
-        <div className="w-full flex justify-center">
+        <div className="w-full">
           <img
-            className="w-full max-h-[420px] object-cover rounded-xl shadow-md"
+            className="w-full h-64 sm:h-80 md:h-[420px] object-cover rounded-xl shadow-md"
             src={service?.imageurl}
             alt={service?.name}
           />
         </div>
 
-        {/* Text Content */}
-        <div className="mt-8 space-y-4">
-          <h2 className="font-bold text-3xl text-gray-800">
-            {service?.name}
-          </h2>
+        {/* Content */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          <p className="text-lg text-gray-600">
-            <span className="font-semibold text-gray-700">Category:</span> {service?.category}
-          </p>
+          <div className="space-y-4">
+            <h2 className="font-bold text-2xl sm:text-3xl text-gray-800">
+              {service?.name}
+            </h2>
 
-          <p className="text-lg text-gray-600 leading-relaxed">
-            <span className="font-semibold text-gray-700 block mb-1">Description:</span> 
-            {service?.description}
-          </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Category:</span> {service?.category}
+            </p>
 
-          <p className="text-lg text-gray-600">
-            <span className="font-semibold text-gray-700">Provider Email:</span> {service?.email}
-          </p>
+            <p className="text-gray-600 leading-relaxed">
+              <span className="font-semibold block mb-1">Description:</span>
+              {service?.description}
+            </p>
 
-          <p className="text-lg text-gray-600">
-            <span className="font-semibold text-gray-700">Location:</span> {service?.location}
-          </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Provider Email:</span> {service?.email}
+            </p>
 
-          <p className="text-lg text-gray-600">
-            <span className="font-semibold text-gray-700">Listed at:</span> {service?.date}
-          </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Location:</span> {service?.location}
+            </p>
 
-          <p className="text-xl font-bold text-gray-800">
-            Price: {service?.price} tk
-          </p>
-        </div>
+            <p className="text-gray-600">
+              <span className="font-semibold">Listed at:</span> {service?.date}
+            </p>
+          </div>
 
-        {/* Button */}
-        <div className="mt-8">
-          <button
-            className="px-6 py-3 bg-gray-800 text-white rounded-xl shadow hover:bg-gray-900 transition"
-            onClick={() => document.getElementById('my_modal_3').showModal()}
-          >
-            Order Now
-          </button>
+          {/* Price + Button */}
+          <div className="flex flex-col justify-between bg-gray-50 p-6 rounded-xl shadow-inner">
+            <p className="text-3xl font-bold text-gray-800 mb-6">
+              {service?.price} tk
+            </p>
+
+            <button
+              className="w-full py-3 bg-gray-800 text-white rounded-xl hover:bg-gray-900 transition-all"
+              onClick={() => document.getElementById('my_modal_3').showModal()}
+            >
+              Order Now
+            </button>
+          </div>
         </div>
 
         {/* Modal */}
-        <dialog id="my_modal_3" className="modal">
-          <div className="modal-box rounded-xl p-6">
+        <dialog id="my_modal_3" className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box max-w-2xl rounded-2xl p-4 sm:p-6">
+
             <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3">✕</button>
             </form>
-            <h3 className="font-bold text-3xl text-center text-gray-700">Order Details</h3>
-            {/* Modal order form */}
-            <form onSubmit={handleOrder} className="max-w-xl mx-auto bg-white shadow-xl rounded-xl p-6 mt-10 border">
 
-                {/* Pet Info */}
-                <div className="bg-indigo-50 p-4 rounded-lg mb-6">
-                    <p><strong>Item/Pet Name :</strong> {service?.name}</p>
-                    <p><strong>Category :</strong> {service?.category}</p>
-                    <p><strong>Price :</strong> {service?.price}Tk</p>
-                    <p><strong>Seller Location :</strong> {service?.location}</p>
+            <h3 className="font-bold text-2xl sm:text-3xl text-center mb-6 text-gray-700">
+              Order Details
+            </h3>
+
+            <form onSubmit={handleOrder} className="space-y-4">
+
+              {/* Item Info */}
+              <div className="bg-indigo-50 p-4 rounded-lg text-sm space-y-1">
+                <p><strong>Item:</strong> {service?.name}</p>
+                <p><strong>Category:</strong> {service?.category}</p>
+                <p><strong>Price:</strong> {service?.price} Tk</p>
+                <p><strong>Seller Location:</strong> {service?.location}</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <div>
+                  <label className="font-semibold">Buyer Name</label>
+                  <input readOnly name="buyerName" defaultValue={user?.displayName} className="input input-bordered w-full" />
                 </div>
 
-                <div className="space-y-4">
-
-                    <div>
-                    <label className="font-semibold">Buyer Name</label>
-                    <input
-                        type="text"
-                        name='buyerName'
-                        readOnly
-                        defaultValue={user?.displayName}
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Enter name"
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Email</label>
-                    <input
-                        type="email"
-                        name='email'
-                        readOnly
-                        defaultValue={user?.email}
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Enter your email"
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Product/Listing ID</label>
-                    <input
-                        type="text"
-                        name='productId'
-                        readOnly
-                        defaultValue={service?._id}
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Product/Listing ID"
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Product/Listing Name</label>
-                    <input
-                        type="text"
-                        name='productName'
-                        readOnly
-                        defaultValue={service?.name}
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Product/Listing Name"
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Phone Number</label>
-                    <input
-                        type="text"
-                        name='phoneNumber'
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Enter phone number"
-                        required
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Quantity</label>
-                    <input
-                        type="number"
-                        name='quantity'
-                        defaultValue={1}
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Enter Quantity"
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Price</label>
-                    <input
-                        type="number"
-                        name='price'
-                        readOnly
-                        defaultValue={service?.price}
-                        className="w-full p-2 border rounded-md"
-                        placeholder="Price"
-                    />
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Address</label>
-                    <textarea
-                        className="w-full p-2 border rounded-md"
-                        name='address'
-                        rows="2"
-                        placeholder="Enter full address"
-                        required
-                    ></textarea>
-                    </div>
-
-                    <div>
-                    <label className="font-semibold">Select PickUp date</label>
-                    <input
-                    type="date"
-                    name="date"
-                    
-                    
-                    className="p-3 border rounded-xl w-full"
-                    required
-                    />
-                    </div>
-
-                    
-
-                    <div>
-                    <label className="font-semibold">Additional notes (Optional)</label>
-                    <textarea
-                        className="w-full p-2 border rounded-md"
-                        name='notes'
-                        rows="3"
-                        placeholder="Write any message or additional notes if you want to add..."
-                    ></textarea>
-                    </div>
-
-                    <button
-                    type="submit"
-                    className="w-full bg-gray-800 text-white py-2 rounded-xl hover:bg-gray-600 transition"
-                    >
-                        Submit Order
-                    </button>
-
+                <div>
+                  <label className="font-semibold">Email</label>
+                  <input readOnly name="email" defaultValue={user?.email} className="input input-bordered w-full" />
                 </div>
 
-                </form>
+                <div>
+                  <label className="font-semibold">Product ID</label>
+                  <input readOnly name="productId" defaultValue={service?._id} className="input input-bordered w-full" />
+                </div>
 
-            
+                <div>
+                  <label className="font-semibold">Product Name</label>
+                  <input readOnly name="productName" defaultValue={service?.name} className="input input-bordered w-full" />
+                </div>
+
+                <div>
+                  <label className="font-semibold">Phone Number</label>
+                  <input name="phoneNumber" required className="input input-bordered w-full" />
+                </div>
+
+                <div>
+                  <label className="font-semibold">Quantity</label>
+                  <input type="number" name="quantity" defaultValue={1} className="input input-bordered w-full" />
+                </div>
+
+                <div>
+                  <label className="font-semibold">Price</label>
+                  <input readOnly name="price" defaultValue={service?.price} className="input input-bordered w-full" />
+                </div>
+
+                <div>
+                  <label className="font-semibold">Pickup Date</label>
+                  <input type="date" name="date" required className="input input-bordered w-full" />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-semibold">Address</label>
+                <textarea name="address" required rows="2" className="textarea textarea-bordered w-full" />
+              </div>
+
+              <div>
+                <label className="font-semibold">Additional Notes</label>
+                <textarea name="notes" rows="3" className="textarea textarea-bordered w-full" />
+              </div>
+
+              <button type="submit" className="w-full bg-gray-800 text-white py-3 rounded-xl hover:bg-gray-700 transition">
+                Submit Order
+              </button>
+
+            </form>
           </div>
         </dialog>
 
